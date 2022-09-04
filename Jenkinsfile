@@ -1,9 +1,10 @@
 // Declarative
 pipeline {
-	agent any
+	agent { docker { image 'maven:3.8.6' }}
 	stages{
 		stage('Build') {
 			steps {
+				sh 'mvn --version'
 				echo "Build"
 			}
 		}
@@ -27,6 +28,9 @@ pipeline {
 		}
 		failure {
 			echo "If you see this then it is fail!"
+		}
+		changed {
+			echo "Change is constant"
 		}
 	}
 }
